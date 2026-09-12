@@ -4,22 +4,17 @@
 
 package com.mycompany.laundry;
 
-/**
- *
- * @author Lenovo
- */
-
-
 import javax.swing.JOptionPane;
 
 class Laundryapp {
 
-    String namaPelanggan;
-    String jenisLayanan;
-    double berat;
-    double hargaPerKg;
+    // FIELD
+    private String namaPelanggan;
+    private String jenisLayanan;
+    private double berat;
+    private double hargaPerKg;
 
-    Laundryapp(String namaPelanggan, String jenisLayanan,
+    public Laundryapp(String namaPelanggan, String jenisLayanan,
             double berat, double hargaPerKg) {
 
         this.namaPelanggan = namaPelanggan;
@@ -28,30 +23,61 @@ class Laundryapp {
         this.hargaPerKg = hargaPerKg;
     }
 
-    double hitungTotal() {
+    public String getNamaPelanggan() {
+        return namaPelanggan;
+    }
+
+    public String getJenisLayanan() {
+        return jenisLayanan;
+    }
+
+    public double getBerat() {
+        return berat;
+    }
+
+    public double getHargaPerKg() {
+        return hargaPerKg;
+    }
+
+    public void setNamaPelanggan(String namaPelanggan) {
+        this.namaPelanggan = namaPelanggan;
+    }
+
+    public void setJenisLayanan(String jenisLayanan) {
+        this.jenisLayanan = jenisLayanan;
+    }
+
+    public void setBerat(double berat) {
+        this.berat = berat;
+    }
+
+    public void setHargaPerKg(double hargaPerKg) {
+        this.hargaPerKg = hargaPerKg;
+    }
+
+    public double hitungTotal() {
         return berat * hargaPerKg;
     }
 
-    void tampilkanData() {
-
-        double total = hitungTotal();
+    public void tampilkanData() {
 
         JOptionPane.showMessageDialog(
                 null,
                 " DATA LAUNDRY \n\n"
-                + "Nama Pelanggan : " + namaPelanggan + "\n"
-                + "Jenis Layanan  : " + jenisLayanan + "\n"
-                + "Berat Cucian   : " + berat + " Kg\n"
-                + "Harga / Kg     : Rp" + hargaPerKg + "\n"
-                + "Total Bayar    : Rp" + total
+                + "Nama Pelanggan : " + getNamaPelanggan() + "\n"
+                + "Jenis Layanan  : " + getJenisLayanan() + "\n"
+                + "Berat Cucian   : " + getBerat() + " Kg\n"
+                + "Harga / Kg     : Rp" + getHargaPerKg() + "\n"
+                + "Total Bayar    : Rp" + hitungTotal()
         );
     }
 }
+
 public class Laundry {
 
     public static void main(String[] args) {
-        
-JOptionPane.showMessageDialog(
+
+        JOptionPane.showMessageDialog(
                 null,
                 " SISTEM MANAJEMEN LAUNDRY "
         );
@@ -118,13 +144,13 @@ JOptionPane.showMessageDialog(
             return;
         }
 
-        Laundryapp laundryapp1 = new Laundryapp(
+        Laundryapp laundry1 = new Laundryapp(
                 nama,
                 layanan,
                 berat,
                 harga
         );
 
-        laundryapp1.tampilkanData();
+        laundry1.tampilkanData();
     }
 }
