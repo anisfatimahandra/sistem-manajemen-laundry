@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 
 class Laundryapp {
 
-    // FIELD
     private String namaPelanggan;
     private String jenisLayanan;
     private double berat;
@@ -48,7 +47,19 @@ class Laundryapp {
     }
 
     public void setBerat(double berat) {
-        this.berat = berat;
+
+        if (berat > 0) {
+            this.berat = berat;
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Berat berhasil diubah menjadi " + berat + " Kg"
+            );
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Berat tidak valid! Berat harus lebih dari 0 Kg."
+            );
+        }
     }
 
     public void setHargaPerKg(double hargaPerKg) {
@@ -150,6 +161,18 @@ public class Laundry {
                 berat,
                 harga
         );
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Data melalui Getter:\n\n"
+                + "Nama : " + laundry1.getNamaPelanggan() + "\n"
+                + "Layanan : " + laundry1.getJenisLayanan() + "\n"
+                + "Berat : " + laundry1.getBerat() + " Kg"
+        );
+
+        laundry1.setBerat(5);
+
+        laundry1.setBerat(-2);
 
         laundry1.tampilkanData();
     }
