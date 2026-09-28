@@ -2,87 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
 package com.mycompany.laundry;
 
 import javax.swing.JOptionPane;
-
-class Laundryapp {
-
-    private String namaPelanggan;
-    private String jenisLayanan;
-    private double berat;
-    private double hargaPerKg;
-
-    public Laundryapp(String namaPelanggan, String jenisLayanan,
-            double berat, double hargaPerKg) {
-
-        this.namaPelanggan = namaPelanggan;
-        this.jenisLayanan = jenisLayanan;
-        this.berat = berat;
-        this.hargaPerKg = hargaPerKg;
-    }
-
-    public String getNamaPelanggan() {
-        return namaPelanggan;
-    }
-
-    public String getJenisLayanan() {
-        return jenisLayanan;
-    }
-
-    public double getBerat() {
-        return berat;
-    }
-
-    public double getHargaPerKg() {
-        return hargaPerKg;
-    }
-
-    public void setNamaPelanggan(String namaPelanggan) {
-        this.namaPelanggan = namaPelanggan;
-    }
-
-    public void setJenisLayanan(String jenisLayanan) {
-        this.jenisLayanan = jenisLayanan;
-    }
-
-    public void setBerat(double berat) {
-
-        if (berat > 0) {
-            this.berat = berat;
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Berat berhasil diubah menjadi " + berat + " Kg"
-            );
-        } else {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Berat tidak valid! Berat harus lebih dari 0 Kg."
-            );
-        }
-    }
-
-    public void setHargaPerKg(double hargaPerKg) {
-        this.hargaPerKg = hargaPerKg;
-    }
-
-    public double hitungTotal() {
-        return berat * hargaPerKg;
-    }
-
-    public void tampilkanData() {
-
-        JOptionPane.showMessageDialog(
-                null,
-                " DATA LAUNDRY \n\n"
-                + "Nama Pelanggan : " + getNamaPelanggan() + "\n"
-                + "Jenis Layanan  : " + getJenisLayanan() + "\n"
-                + "Berat Cucian   : " + getBerat() + " Kg\n"
-                + "Harga / Kg     : Rp" + getHargaPerKg() + "\n"
-                + "Total Bayar    : Rp" + hitungTotal()
-        );
-    }
-}
 
 public class Laundry {
 
@@ -98,7 +24,7 @@ public class Laundry {
                 "Masukkan nama pelanggan:"
         );
 
-        if (nama == null) {
+        if (nama == null || nama.trim().isEmpty()) {
             return;
         }
 
@@ -145,6 +71,15 @@ public class Laundry {
 
         try {
             berat = Double.parseDouble(inputBerat);
+
+            if (berat <= 0) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Berat harus lebih dari 0 Kg!"
+                );
+                return;
+            }
+
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(
@@ -155,12 +90,27 @@ public class Laundry {
             return;
         }
 
-        Laundryapp laundry1 = new Laundryapp(
-                nama,
-                layanan,
-                berat,
-                harga
-        );
+        LaundryApp laundry1;
+
+        if (layanan.equals("Express")) {
+
+            laundry1 = new LaundryExpress(
+                    nama,
+                    layanan,
+                    berat,
+                    harga,
+                    5000
+            );
+
+        } else {
+
+            laundry1 = new LaundryApp(
+                    nama,
+                    layanan,
+                    berat,
+                    harga
+            );
+        }
 
         JOptionPane.showMessageDialog(
                 null,
@@ -169,10 +119,6 @@ public class Laundry {
                 + "Layanan : " + laundry1.getJenisLayanan() + "\n"
                 + "Berat : " + laundry1.getBerat() + " Kg"
         );
-
-        laundry1.setBerat(5);
-
-        laundry1.setBerat(-2);
 
         laundry1.tampilkanData();
     }
