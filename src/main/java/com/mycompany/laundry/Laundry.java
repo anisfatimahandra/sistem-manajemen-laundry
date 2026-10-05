@@ -11,115 +11,46 @@ package com.mycompany.laundry;
 import javax.swing.JOptionPane;
 
 public class Laundry {
-
     public static void main(String[] args) {
 
-        JOptionPane.showMessageDialog(
-                null,
-                " SISTEM MANAJEMEN LAUNDRY "
+        LaundryApp laundry1 = new LaundryApp(
+                "Anis",
+                "08123456789",
+                "Cuci Setrika",
+                3,
+                10000
         );
 
-        String nama = JOptionPane.showInputDialog(
-                null,
-                "Masukkan nama pelanggan:"
+        LaundryExpress laundry2 = new LaundryExpress(
+                "Tima",
+                "08234567890",
+                "Express",
+                2,
+                15000,
+                5000
         );
 
-        if (nama == null || nama.trim().isEmpty()) {
-            return;
-        }
+        System.out.println(" LAUNDRY BIASA ");
 
-        String[] pilihanLayanan = {
-            "Cuci Kering",
-            "Cuci Setrika",
-            "Express"
-        };
+        laundry1.tampilkanIdentitas();
+        laundry1.lakukanLayanan();
+        laundry1.tampilkanInfo();
+        laundry1.tampilkanTransaksi();
 
-        String layanan = (String) JOptionPane.showInputDialog(
-                null,
-                "Pilih jenis layanan:",
-                "Layanan Laundry",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                pilihanLayanan,
-                pilihanLayanan[0]
+        System.out.println();
+
+        System.out.println(" LAUNDRY EXPRESS ");
+
+        laundry2.tampilkanIdentitas();
+        laundry2.lakukanLayanan();
+        laundry2.tampilkanInfo();
+        laundry2.tampilkanTransaksi();
+
+        System.out.println();
+
+        System.out.println(
+                "Total setelah diskon: Rp"
+                + laundry1.hitungTotal(5000)
         );
-
-        if (layanan == null) {
-            return;
-        }
-
-        double harga;
-
-        if (layanan.equals("Cuci Kering")) {
-            harga = 7000;
-        } else if (layanan.equals("Cuci Setrika")) {
-            harga = 10000;
-        } else {
-            harga = 15000;
-        }
-
-        String inputBerat = JOptionPane.showInputDialog(
-                null,
-                "Masukkan berat cucian (Kg):"
-        );
-
-        if (inputBerat == null) {
-            return;
-        }
-
-        double berat;
-
-        try {
-            berat = Double.parseDouble(inputBerat);
-
-            if (berat <= 0) {
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Berat harus lebih dari 0 Kg!"
-                );
-                return;
-            }
-
-        } catch (NumberFormatException e) {
-
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Berat harus berupa angka!"
-            );
-
-            return;
-        }
-
-        LaundryApp laundry1;
-
-        if (layanan.equals("Express")) {
-
-            laundry1 = new LaundryExpress(
-                    nama,
-                    layanan,
-                    berat,
-                    harga,
-                    5000
-            );
-
-        } else {
-
-            laundry1 = new LaundryApp(
-                    nama,
-                    layanan,
-                    berat,
-                    harga
-            );
-        }
-
-        JOptionPane.showMessageDialog(
-                null,
-                "Data melalui Getter:\n\n"
-                + "Nama : " + laundry1.getNamaPelanggan() + "\n"
-                + "Layanan : " + laundry1.getJenisLayanan() + "\n"
-                + "Berat : " + laundry1.getBerat() + " Kg"
-        );
-
-        laundry1.tampilkanData();
     }
 }
