@@ -12,15 +12,21 @@ package com.mycompany.laundry;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 import javax.swing.JOptionPane;
-
 public class LaundryExpress extends LaundryApp {
 
     private double biayaExpress;
 
-    public LaundryExpress(String namaPelanggan, String jenisLayanan,
-            double berat, double hargaPerKg, double biayaExpress) {
+    public LaundryExpress(String nama, String noTelepon,
+            String jenisLayanan, double berat,
+            double hargaPerKg, double biayaExpress) {
 
-        super(namaPelanggan, jenisLayanan, berat, hargaPerKg);
+        super(
+                nama,
+                noTelepon,
+                jenisLayanan,
+                berat,
+                hargaPerKg
+        );
 
         this.biayaExpress = biayaExpress;
     }
@@ -33,22 +39,32 @@ public class LaundryExpress extends LaundryApp {
         this.biayaExpress = biayaExpress;
     }
 
-    public double hitungTotalExpress() {
-        return hitungTotal() + biayaExpress;
+    @Override
+    public String getJenisPelanggan() {
+        return "Pelanggan Laundry Express";
     }
 
     @Override
-    public void tampilkanData() {
-
-        JOptionPane.showMessageDialog(
-                null,
-                " DATA LAUNDRY EXPRESS \n\n"
-                + "Nama Pelanggan : " + getNamaPelanggan() + "\n"
-                + "Jenis Layanan  : " + getJenisLayanan() + "\n"
-                + "Berat Cucian   : " + getBerat() + " Kg\n"
-                + "Harga / Kg     : Rp" + getHargaPerKg() + "\n"
-                + "Biaya Express  : Rp" + getBiayaExpress() + "\n"
-                + "Total Bayar    : Rp" + hitungTotalExpress()
+    public void lakukanLayanan() {
+        System.out.println(
+                nama + " menggunakan layanan Laundry Express."
         );
+    }
+
+    @Override
+    public double hitungTotal() {
+        return (berat * hargaPerKg) + biayaExpress;
+    }
+
+    @Override
+    public void tampilkanTransaksi() {
+
+        super.tampilkanIdentitas();
+
+        System.out.println("Jenis Layanan : " + jenisLayanan);
+        System.out.println("Berat         : " + berat + " Kg");
+        System.out.println("Harga / Kg    : Rp" + hargaPerKg);
+        System.out.println("Biaya Express : Rp" + biayaExpress);
+        System.out.println("Total Bayar   : Rp" + hitungTotal());
     }
 }
